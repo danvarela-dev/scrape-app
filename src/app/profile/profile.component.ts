@@ -11,7 +11,7 @@ import { UserService } from '../shared/user.service';
       <div class="box">
         <br />
         <input
-          id="id"
+          id="id-text"
           class="input"
           type="text"
           placeholder="Github username"
@@ -21,14 +21,15 @@ import { UserService } from '../shared/user.service';
     </div>
     <br />
     <br />
-    <div *ngFor="let item of list" class="list wrap container col-sm-3">
-      <li >
-        <img src="{{ item.avatar_url }}" alt="pic" align=left />
-        <h2>{{ item?.name }}</h2>
-        <p>{{ item?.company }}</p>
-        <br>
-      </li>
-    </div>
+    <ul class="list-group">
+      <div *ngFor="let item of list" class="list container col-sm-3">
+        <li class="list-group-item">
+          <img src="{{ item.avatar_url }}" alt="pic" align=left />
+          <h2>{{ item?.name }}</h2>
+          <p>{{ item?.company }}</p>
+        </li>
+      </div>
+    </ul>
   `,
   styles: [
     `
@@ -50,6 +51,9 @@ import { UserService } from '../shared/user.service';
         width: 120px;
         height: 120px;
       }
+      .list-group-item{
+        height:140px; 
+      }
       
     `,
   ],
@@ -61,7 +65,7 @@ export class ProfileComponent {
   list: any[];
 
   setId() {
-    this.id = (document.getElementById('id') as HTMLInputElement).value;
+    this.id = (document.getElementById('id-text') as HTMLInputElement).value;
     this.list = this.usersvc.getUser(this.id);
   }
 }
